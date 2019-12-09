@@ -41,7 +41,7 @@
     "node-sass": "^4.11.0",
     "react-md-spinner": "^1.0.0",
     "webpack": "^2.2.1",
-    "webpack-dev-server": "^2.9.1"
+    "webpack-dev-server": "^3.1.11"
   },
   "resolutions": {
     "natives": "1.1.3"
