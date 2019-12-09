@@ -1,5 +1,6 @@
 import React from 'react';
 import SearchInput from './search.jsx'
+import keys from "../../scripts/keys.jsx";
 
 class Header extends React.Component {
 	constructor(props) {
@@ -9,7 +10,7 @@ class Header extends React.Component {
 	}
 
 	search(data) {
-
+		
 		var props = this.props
 		props.updateState(true, false, [])
 		var callback = function (data, props) {
@@ -53,6 +54,7 @@ class Header extends React.Component {
 
 		var init = function(data) {
 			gapi.load("client:auth2", function() {
+				gapi.auth2.init({client_id: keys.client_id});
 				authenticate()
 				loadClient()
 			});
@@ -67,6 +69,8 @@ class Header extends React.Component {
 			}
 
 			var loadClient = function() {
+				gapi.client.setApiKey(keys.api_key);
+				return gapi.client.load("https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest")
 			}
 		}
 
