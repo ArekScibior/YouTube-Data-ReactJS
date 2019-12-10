@@ -79,9 +79,18 @@ font-family: 'Merriweather', serif; */
 	color: #fff;
 }
 
-.video-contener {
+.banner {
+	width:100%;
+}
+
+.userInfo {
+	display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.video-conteiner {
 	border: 5px solid #F20000;
-	border-radius: 0px 40px 0px 0px;
 	padding: 4px;
 	display: flex;
 	flex-direction: column;
@@ -100,10 +109,17 @@ font-family: 'Merriweather', serif; */
 }
 
 .yt-name {
-	text-align: center;
-	width: 1270px;
 	font-family: 'Merriweather', serif;
 	font-size: 5rem;
+}
+
+.container-items {
+	background: #3333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+	flex-wrap: wrap;
+	padding: 60px;
 }
 
 /* spinner */

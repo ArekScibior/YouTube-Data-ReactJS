@@ -10,9 +10,9 @@ class Header extends React.Component {
 	}
 
 	search(data) {
-		
+		var dataObj = {}
 		var props = this.props
-		props.updateState(true, false, [])
+		props.updateState(true, false, dataObj)
 		var callback = function (data, props) {
 			var playlist = [];
 			var channelUploadId = ""
@@ -29,23 +29,28 @@ class Header extends React.Component {
 					var modifyPlaylist = _.map(playlist, function(el) {
 						return el.snippet
 					})
-					props.updateState(false, true, modifyPlaylist)
+					dataObj.playlist = modifyPlaylist
+					props.updateState(false, true, dataObj)
 				});
 			}
 
 			function searchChannelStatistics(data) {
 				var payload = {
-					"part": "snippet,contentDetails, statistics",
-					"id": data
+					"part": "snippet,contentDetails, statistics, brandingSettings",
+					"forUsername": data,
+					//"id": data
 				}
-				//id = UCwBtP6NDQtsP5YBa4vuZqHA
+				//id = UCwBtP6NDQtsP5YBa4vuZqHA - friz bnt - UC5FWImlh1axobNU541SIHHg Arczi - UCKGy5bsWhfug36p5jyt3-gA
 				return gapi.client.youtube.channels.list(payload).then(function(response) {
 					if (response.result.pageInfo.totalResults == 0) {
-						props.updateState(false, false, [])
+						dataObj.playlist = []
+						dataObj.channelInfo = []
+						props.updateState(false, false, dataObj)
 						alert("Brak danych!")
 					} else {
 						channelUploadId = response.result.items[0].contentDetails.relatedPlaylists.uploads
-						searchPlaylist(25);
+						dataObj.channelInfo = response.result.items[0]
+						searchPlaylist(26);
 					}
 				})
 			}
@@ -86,7 +91,7 @@ class Header extends React.Component {
 	render() {
 		const {logoSubTitle} = this.props
 		return (
-			<div className='container-fluid margin-t-35 margin-l-35'>
+			<div className='container-fluid margin-t-35'>
 				<span className="pull-left">
 					<img className="margin-t-n-15" src="../styles/img/youtube-logo.jpg" width="190px" alt="ytlogo"/>
 					<span className="logo-text">{logoSubTitle}</span>
